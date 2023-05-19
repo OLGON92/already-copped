@@ -16,14 +16,18 @@ const passwordReset = (email) =>
     redirectTo: "http://localhost:3000/update-password"
   });
 
+  const updatePassword = (updatePassword) =>
+  supabase.auth.updatePassword({ password: updatePassword });
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [auth, setAuth] = useState(false);
 
   useEffect(() => {
-    const { data } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === "SIGNED_IN") {
+    const { data } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event == "PASSWORD_RECOVERY"){
+        setAuth(false);
+      } else if (event === "SIGNED_IN") {
         setUser(session.user);
         setAuth(true);
       } else if (event === "SIGNED_OUT") {
@@ -37,8 +41,16 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ auth, user, signIn, signOut, passwordReset }}>
-      {children}
+    <AuthContext.Provider 
+      value={{ 
+        auth, 
+        user, 
+        signIn, 
+        signOut, 
+        passwordReset, 
+        updatePassword
+      }}>
+      {children}  
     </AuthContext.Provider>
   );
 };
