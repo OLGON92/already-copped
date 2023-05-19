@@ -63,6 +63,9 @@ const SignIn = () => {
         <div className="w-100 text-center mt-2">
           Need an account? <Link to="/signUp">Sign Up</Link>
         </div>
+        <div className="w-100 text-center mt-2">
+          Forgot Password? <Link to="/passwordreset">Reset Password</Link>
+        </div>
       </Card>
     </>
   );
