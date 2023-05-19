@@ -16,14 +16,24 @@ const passwordReset = (email) =>
     redirectTo: "http://localhost:3000/update-password"
   });
 
-  const updatePassword = (updatePassword) =>
+const updatePassword = (updatePassword) =>
   supabase.auth.updatePassword({ password: updatePassword });
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [auth, setAuth] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
+    const getUser = async () => {
+      const { data } = await supabase.auth.getUser();
+      const { user: currentUser } = data;
+      setUser(currentUser ?? null);
+      setAuth(currentUser ? true : false);
+      setLoading(false);
+    };
+    getUser();
     const { data } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (event == "PASSWORD_RECOVERY"){
         setAuth(false);
@@ -50,7 +60,7 @@ const AuthProvider = ({ children }) => {
         passwordReset, 
         updatePassword
       }}>
-      {children}  
+      {!loading && children}  
     </AuthContext.Provider>
   );
 };
