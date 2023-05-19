@@ -1,14 +1,25 @@
 import React from "react";
 import Header from "./Header"
 import ItemControl from "./ItemControl";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { SignIn } from "./SignIn";
+import { SignUp } from "./SignUp";
+import  Dashboard  from "./Dashboard";
+import { AuthProvider } from "../contexts/Auth";
 
-function App() {
+
+export default function App() {
   return (
-    <React.Fragment>
+    <Router>
       <Header />
-      <ItemControl />
-    </React.Fragment>
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={<Dashboard /> } />
+            <Route path="/signUp" element={<SignUp/>} />
+            <Route path="/signIn" element={<SignIn/>} />
+          </Routes>
+        </AuthProvider>
+    </Router>
   );
 }
 
-export default App;
