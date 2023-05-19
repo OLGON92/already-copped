@@ -7,6 +7,7 @@ import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import  Dashboard  from "./Dashboard";
 import AuthRoute from "./AuthRoute";
+import PasswordReset from "./PasswordReset";
 
 
 
@@ -25,6 +26,7 @@ const App = () => {
             </Route>
             <Route path="/signIn" element={<SignIn />} />
             <Route path="/signUp" element={<SignUp />} />
+            <Route path="/passwordreset" element={<PasswordReset />} />
           </Routes>
         </div>
       </Container>
