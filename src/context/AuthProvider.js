@@ -12,7 +12,9 @@ const signIn = (email, password) =>
 const signOut = () => supabase.auth.signOut();
 
 const passwordReset = (email) =>
-  supabase.auth.api.resetPasswordForEmail(email);
+  supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: "http://localhost:3000/update-password"
+  });
 
 
 const AuthProvider = ({ children }) => {
