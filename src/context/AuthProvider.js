@@ -11,6 +11,10 @@ const signIn = (email, password) =>
 
 const signOut = () => supabase.auth.signOut();
 
+const passwordReset = (email) =>
+  supabase.auth.api.resetPasswordForEmail(email);
+
+
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [auth, setAuth] = useState(false);
@@ -31,7 +35,7 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, signIn, signOut }}>
+    <AuthContext.Provider value={{ auth, user, signIn, signOut, passwordReset }}>
       {children}
     </AuthContext.Provider>
   );
