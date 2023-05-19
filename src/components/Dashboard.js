@@ -1,14 +1,17 @@
 import React from "react";
+import { useAuth } from "../context/AuthProvider";
 
-export default function Dashboard() {
-  async function handleSignOut() {
 
-  }
-
+const Dashboard = () => {
+  const { user } = useAuth();
   return (
     <div>
-      <p>Welcome to Already Copped!</p>
-      <button onClick={handleSignOut}>Sign Out</button>
+      <h1>Dashboard</h1>
+      <p>You are logged in and your email address is {user.email}</p>
     </div>
-  )
-}
+  );
+};
+
+export default Dashboard;
+
+// This will eventually be an edit profile section 
