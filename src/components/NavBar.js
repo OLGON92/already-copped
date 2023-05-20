@@ -1,4 +1,4 @@
-import { Button, NavbarBrand } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import React from "react";
 import Container from "react-bootstrap/Container";
 import { Link } from "react-router-dom";
@@ -44,7 +44,7 @@ const NavBar = () => {
           </Nav>
           <Nav>
             {auth && (
-              <Nav.Link as={Button} to="/" onClick={handleLogout}>
+              <Nav.Link as={Button} onClick={handleLogout}>
                 Sign Out
               </Nav.Link>
             )}
