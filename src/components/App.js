@@ -1,20 +1,21 @@
 import React from "react";
-import Header from "./Header";
 import { Container } from "react-bootstrap";
 import ItemControl from "./ItemControl";
 import { Routes, Route } from "react-router-dom";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
-import  Dashboard  from "./Dashboard";
+import Dashboard  from "./Dashboard";
 import AuthRoute from "./AuthRoute";
 import PasswordReset from "./PasswordReset";
+import NavBar from "./NavBar";
+import UpdatePassword from "./UpdatePassword";
 
 
 
 const App = () => {
   return (
     <>
-      <Header />
+      <NavBar />
       <Container
         className="d-flex align-items-center justify-content-center"
         style={{ minHeight: "100vh"}}>
@@ -27,6 +28,7 @@ const App = () => {
             <Route path="/signIn" element={<SignIn />} />
             <Route path="/signUp" element={<SignUp />} />
             <Route path="/passwordreset" element={<PasswordReset />} />
+            <Route path="/update-password" element={<UpdatePassword />} />
           </Routes>
         </div>
       </Container>
