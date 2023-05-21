@@ -7,20 +7,24 @@ function ReusableForm(props) {
       <form onSubmit={props.formSubmissionHandler}>
         <input
           type='text'
-          name='name'
-          placeholder='Item Name' />
+          name='title'
+          placeholder='Item Name' 
+          required />
         <input
           type='text'
           name='description'
-          placeholder='Item Description' />
+          placeholder='Item Description' 
+          required/>
         <input
           type='number'
           name='quantity'
-          placeholder='Item Quantity' />
+          placeholder='Item Quantity' 
+          required />
         <input
           type='number'
           name='price'
-          placeholder='Item Price' />
+          placeholder='Item Price' 
+          required/>
         <button type='submit'>{props.buttonText}</button>
       </form>
     </>
