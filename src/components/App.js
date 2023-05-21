@@ -1,6 +1,6 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import ItemControl from "./ItemControl";
+import ListingControl from "./ListingControl";
 import { Routes, Route } from "react-router-dom";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
@@ -24,6 +24,7 @@ const App = () => {
             <Route element={<AuthRoute />}>
               <Route path="/" element={<Dashboard />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/listingcontrol" element={<ListingControl />} />
             </Route>
             <Route path="/signIn" element={<SignIn />} />
             <Route path="/signUp" element={<SignUp />} />
