@@ -13,7 +13,6 @@ function ListingList(props) {
           description={listing.description}
           quantity={listing.quantity}
           price={listing.price}
-          formattedWaitTime={listing.formattedWaitTime}
           id={listing.id}
           key={listing.id}/>
       )}
