@@ -41,6 +41,11 @@ const NavBar = () => {
                 Dashboard
               </Nav.Link>
             )}
+            {auth && (
+              <Nav.Link as={Link} to="/listingcontrol">
+                Listing Control
+              </Nav.Link>
+            )}
           </Nav>
           <Nav>
             {auth && (

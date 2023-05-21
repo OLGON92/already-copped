@@ -5,7 +5,8 @@ import ListingDetail from "./ListingDetail";
 import EditListingForm from "./EditListingForm";
 import { useAuth } from "../context/AuthProvider";
 import { supabase } from "../supabase";
-import { formatDistanceToNow } from "date-fns";
+
+
 
 function ListingControl() {
 
@@ -14,55 +15,29 @@ function ListingControl() {
       const [selectedListing, setSelectedListing] = useState(null);
       const [editing, setEditing] = useState(false);
       const [error, setError] = useState(null);
+      const { user } = useAuth();
       
+  
       useEffect(() => {
         const fetchListings = async () => {
           try {
-          const { data: listings, error } = await supabase.from("listings").select("*").order("created_at");
-
-          if (error) {
+            const { data: listings, error } = await supabase
+              .from("listings")
+              .select("*");
+    
+            if (error) {
+              setError(error.message);
+            } else {
+              setMainListingList(listings);
+            }
+          } catch (error) {
             setError(error.message);
-          } else {
-            const formattedListings = listings.map((listing) => ({
-              ...listing,
-              created_at: new Date(listing.created_at),
-              formattedWaitTime: formatDistanceToNow(new Date (listing.created_at)),
-            }));
-            setMainListingList(formattedListings);
           }
-        } catch (error) {
-          setError(error.message);
-        }
-      };
-
-      fetchListings();
-
-      const subscription = supabase
-        .from("listings")
-        .on("*", () =>{
-          fetchListings();
-        })
-        .subscribe();
-
-      return () => {
-        subscription.unsubscribe();
-      };
-    }, []);
-
-    useEffect(() => {
-      const updateListingElapsedWaitTime = () => {
-        const newMainListingList = mainListingList.map((listing) => ({
-          ...listing,
-          formattedWaitTime: formatDistanceToNow(new Date(listing.created_at)),
-        }));
-        setMainListingList(newMainListingList);
-      };
-      const waitTimeUpdateTimer = setInterval(updateListingElapsedWaitTime, 6000);
-
-      return () => {
-        clearInterval(waitTimeUpdateTimer);
-    };
-  }, [mainListingList]);
+        };
+    
+        fetchListings();
+      }, []);
+    
 
   const handleClick = () => {
     if (selectedListing != null) {
@@ -96,8 +71,10 @@ function ListingControl() {
     }
   };
 
-  const handleEditClick= () => {
+  const handleEditClick = (id) => {
+    const selectedListing = mainListingList.find((listing) => listing.id === id);
     setEditing(true);
+    setSelectedListing(selectedListing);
   };
 
   const handleEditingListingInList = async (listingToEdit) => {
@@ -109,7 +86,7 @@ function ListingControl() {
       setError(error.message);
     }
   };
-
+    
 
     let currentlyVisibleState = null;
     let buttonText = null;
@@ -147,10 +124,8 @@ function ListingControl() {
       <> 
         {currentlyVisibleState}
         {error ? null : <button onClick={handleClick}>{buttonText}</button>}
-        <button onClick={this.handleClick}>{buttonText}</button>
       </>
     );
-  
 }   
 
 export default ListingControl;

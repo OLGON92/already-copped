@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ReusableForm from "./ReusableForm";
-import { v4 } from "uuid";
-import supabase from "./supabase";
+//import { v4 } from "uuid";
+//import supabase from "./supabase";
 
 function NewListingForm(props) {
 
@@ -15,7 +15,7 @@ function NewListingForm(props) {
       price: parseInt(event.target.price.value), 
       //image: event.target.image.value,
       //created_at: ascending()
-      id: v4()
+      //id: v4()
     });
   }
 

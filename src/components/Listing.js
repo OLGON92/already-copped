@@ -19,7 +19,7 @@ Listing.propTypes = {
   description: PropTypes.string,
   quantity: PropTypes.number,
   price: PropTypes.number,
-  id: PropTypes.string,
+  id: PropTypes.number,
   whenListingClicked: PropTypes.func
 };
 
