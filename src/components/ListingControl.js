@@ -15,7 +15,7 @@ function ListingControl() {
       const [selectedListing, setSelectedListing] = useState(null);
       const [editing, setEditing] = useState(false);
       const [error, setError] = useState(null);
-      //const { user } = useAuth();
+      const { user } = useAuth();
       
   
       useEffect(() => {
