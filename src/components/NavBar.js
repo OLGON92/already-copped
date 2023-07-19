@@ -43,7 +43,7 @@ const NavBar = () => {
             )}
             {auth && (
               <Nav.Link as={Link} to="/listingcontrol">
-                Listing Control
+                Listings
               </Nav.Link>
             )}
           </Nav>
